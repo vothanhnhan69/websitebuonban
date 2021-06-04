@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Login</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+<!--===============================================================================================-->
+	<link rel="icon" type="image/png" href="/static/imageslogin/icons/favicon.ico"/>
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/bootstrap/css/bootstrap.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/fonts/iconic/css/material-design-iconic-font.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/animate/animate.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/css-hamburgers/hamburgers.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/animsition/css/animsition.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/select2/select2.min.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/vendorlogin/daterangepicker/daterangepicker.css">
+<!--===============================================================================================-->
+	<link rel="stylesheet" type="text/css" href="/static/csslogin/util.css">
+	<link rel="stylesheet" type="text/css" href="/static/csslogin/main.css">
+<!--===============================================================================================-->
+<!--===============================================================================================-->
+<script src="/static/vendorlogin/jquery/jquery-3.2.1.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendorlogin/animsition/js/animsition.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendorlogin/bootstrap/js/popper.js"></script>
+	<script src="/static/vendorlogin/bootstrap/js/bootstrap.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendorlogin/select2/select2.min.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendorlogin/daterangepicker/moment.min.js"></script>
+	<script src="/static/vendorlogin/daterangepicker/daterangepicker.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/vendorlogin/countdowntime/countdowntime.js"></script>
+<!--===============================================================================================-->
+	<script src="/static/jslogin/main.js"></script>
+
+
+</head>
+<body>
+
+	<div class="limiter">
+		<div class="container-login100" style="background-image: url('/static/imageslogin/bg-01.jpg');">
+			<div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="height: 700px;">
+				<form class="login100-form validate-form" th:action="@{/j_spring_security_login}" method="post">
+
+					<span class="login100-form-title p-b-49" style="font-family: Arial, Helvetica, sans-serif">
+						Đăng nhập
+					</span>
+
+
+					<th:block th:if="${error}">
+						<div class="alert alert-success" role="alert">
+							<th:block th:utext="${error}"></th:block>
+						</div>
+					</th:block>
+
+					<th:block th:if="${errorfail}">
+						<div class="alert alert-danger" role="alert">
+							<th:block th:utext="${errorfail}"></th:block>
+						</div>
+					</th:block>
+
+					<div class="wrap-input100 validate-input m-b-23" data-validate = "Username is reauired">
+						<span class="label-input100">Tài khoản</span>
+						<input class="input100" type="text" name="username" placeholder="Nhập tài khoản">
+						<span class="focus-input100" data-symbol="&#xf206;"></span>
+					</div>
+
+					<div class="wrap-input100 validate-input" data-validate="Password is required">
+						<span class="label-input100">Mật khẩu</span>
+						<input class="input100" type="password" name="password" placeholder="Nhập mật khẩu">
+						<span class="focus-input100" data-symbol="&#xf190;"></span>
+					</div>
+
+					<div class="text-right p-t-8 p-b-31">
+						<a href="#">
+							Quên mật khẩu?
+						</a>
+						<br>
+					</div>
+
+					<div class="container-login100-form-btn">
+						<div class="wrap-login100-form-btn">
+							<div class="login100-form-bgbtn"></div>
+							<button type="submit" class="login100-form-btn">Đăng nhập</button>
+						</div>
+					</div>
+
+					<br>
+					<div class="text-center p-t-8 p-b-31">
+						<a href="/luachondangky">
+							Đăng ký tài khoản tại đây
+						</a>
+						<br>
+
+					</div>
+
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				</form>
+			</div>
+		</div>
+	</div>
+
+
+	<div id="dropDownSelect1"></div>
+
+
+
+</body>
+</html>

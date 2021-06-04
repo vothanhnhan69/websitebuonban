@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+    <html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="">
+        <meta name="author" content="">
+        <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<section id="slider">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-12">
+                <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                    <ol class="carousel-indicators">
+                        <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                        <li data-target="#slider-carousel" data-slide-to="1"></li>
+                        <li data-target="#slider-carousel" data-slide-to="2"></li>
+                    </ol>
+
+                    <div class="carousel-inner">
+                        <div class="item active">
+                            <div class="col-sm-11">
+                                <img src="https://icms-image.slatic.net/images/ims-web/406efeb8-b2e3-4a91-9bea-4a313f8a089e.jpg" style="box-shadow:  5px 10px 8px 10px #14436D;" class="girl img-responsive" alt="" />
+                            </div>
+                        </div>
+                        <div class="item">
+                            <div class="col-sm-11">
+                                <img src="https://icms-image.slatic.net/images/ims-web/6ed0a8a2-8ba0-45fe-ae7c-56a8543ebceb.jpg" style="box-shadow:  5px 10px 8px 10px #e28743;" class="girl img-responsive" alt="" />
+                            </div>
+                        </div>
+
+                        <div class="item">
+                            <div class="col-sm-11">
+                                <img src="https://icms-image.slatic.net/images/ims-web/f7e68a85-5ac4-4c46-a7c1-91c6a6c7f525.jpg" style="box-shadow:  5px 10px 8px 10px #a08613;" class="girl img-responsive" alt="" />
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                        <i class="fa fa-angle-left"></i>
+                    </a>
+                    <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                        <i class="fa fa-angle-right"></i>
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Sản phẩm mới</h2>
+
+                    <div class="col-sm-4" th:each="item : ${sanphams}">
+                        <div class="product-image-wrapper">
+                            <div class="single-products">
+                                <div class="productinfo text-center">
+                                    <img th:src="@{'getimage/'+${item.hinhanh}}" alt="" />
+                                    <p><del th:text="${item.dongia}"></del></p>
+                                    <h2 th:text="${item.dongia-item.dongia*item.khuyenmai/100}"></h2>
+                                    <p th:text="${item.tensanpham}"></p>
+                                </div>
+
+
+
+                                <div class="product-overlay">
+                                    <div class="overlay-content" >
+                                        <img style="width: 150px; height: 180px;" th:src="@{'getimage/'+${item.hinhanh}}" alt="" />
+                                        <br>
+                                        <p><del th:text="${item.dongia}"></del></p>
+                                        <h2 th:text="${item.dongia-item.dongia*item.khuyenmai/100}"></h2>
+
+                                        <p th:text="${item.tensanpham}"></p>
+                                        <a th:href="${'/giohang/'+ item.masanpham}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="choose">
+                                <ul class="nav nav-pills nav-justified">
+
+                                    <li><a th:href="${'/yeuthich/'+ item.masanpham}" ><i class="fa fa-plus-square"></i>Thêm vào yêu thích</a></li>
+
+                                    <li><a th:href="'/chitietsanpham/'+${item.masanpham}"><i class="fa fa-plus-square"></i>Xem chi tiết</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                    </div>
+
+                <ul class="pagination" th:each="pagenumber : ${pagenumber}">
+                    <li><a th:href="@{/(page=${pagenumber-1},size=9)}"
+                           th:class="${pagenumber-1<0} ? 'btn btn-default disabled':'btn btn-default'">&laquo;</a></li>
+                    <li><a th:block th:utext="${pagenumber+1}"></th:block></a></li>
+                    <li><a th:href="@{/(page=${pagenumber+1},size=9)}"
+                           th:class="${pagenumber+1==totalpage} ? 'btn btn-default disabled':'btn btn-default'">&raquo;</a></li>
+                </ul>
+
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

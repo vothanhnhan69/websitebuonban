@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="keywords"
+          content="wrappixel, admin dashboard, html css dashboard, web dashboard, bootstrap 5 admin, bootstrap 5, css3 dashboard, bootstrap 5 dashboard, Ample lite admin bootstrap 5 dashboard, frontend, responsive bootstrap 5 admin template, Ample admin lite dashboard bootstrap 5 dashboard template">
+    <meta name="description"
+          content="Ample Admin Lite is powerful and clean admin dashboard template, inpired from Bootstrap Framework">
+    <meta name="robots" content="noindex,nofollow">
+    <title>Admin</title>
+
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="/static/jsadmin/app-style-switcher.js"></script>
+    <script src="/static/jsadmin/waves.js"></script>
+    <script src="/static/jsadmin/sidebarmenu.js"></script>
+    <script src="/static/jsadmin/custom.js"></script>
+    <link rel="canonical" href="https://www.wrappixel.com/templates/ample-admin-lite/" />
+    <link rel="icon" type="image/png" sizes="16x16" href="static/plugins/images/favicon.png">
+    <link href="/static/cssadmin/style.min.css" rel="stylesheet">
+    <script type="text/JavaScript" src="/static/jsadmin/rangbuocdulieu.js"></script>
+</head>
+
+<body>
+<div class="container-fluid">
+    <div class="preloader">
+        <div class="lds-ripple">
+            <div class="lds-pos"></div>
+            <div class="lds-pos"></div>
+        </div>
+    </div>
+
+    <div id="main-wrapper" data-layout="vertical" data-navbarbg="skin5" data-sidebartype="full"
+         data-sidebar-position="absolute" data-header-position="absolute" data-boxed-layout="full">
+        <header class="topbar" data-navbarbg="skin5">
+            <nav class="navbar top-navbar navbar-expand-md navbar-dark">
+                <div class="navbar-header" data-logobg="skin6">
+                    <a class="navbar-brand" href="#">
+                        <b class="logo-icon">
+                            <img src="/static/plugins/images/logo-icon.png" alt="homepage" />
+                        </b>
+                        <span class="logo-text">
+                            <img src="/static/images/home/logo.png" href="#" alt="homepage" />>
+                        </span>
+                    </a>
+                    <a class="nav-toggler waves-effect waves-light text-dark d-block d-md-none"
+                       href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                </div>
+                <div class="navbar-collapse collapse" id="navbarSupportedContent" data-navbarbg="skin5">
+                    <ul class="navbar-nav d-none d-md-block d-lg-none">
+                        <li class="nav-item">
+                            <a class="nav-toggler nav-link waves-effect waves-light text-white"
+                               href="javascript:void(0)"><i class="ti-menu ti-close"></i></a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav ms-auto d-flex align-items-center">
+                        <li class=" in">
+                            <form role="search" class="app-search d-none d-md-block me-3" th:action="@{/admin/quanlysanpham}">
+                                <input type="text" placeholder="Tìm kiếm tại đây..." class="form-control mt-0" th:value="${tensp}" name="tensp" required >
+
+                                <button class="btn btn-outline-light">
+                                    <i class="fa fa-search" type="submit"></i>
+                                </button>
+                            </form>
+                        </li>
+
+                        <li>
+                            <a class="profile-pic" href="#">
+                                <img src="/static/plugins/images/users/10.jpg" alt="user-img" width="36"
+                                     class="img-circle">
+                                <span th:utext="${#request.userPrincipal.name}" class="text-white font-medium">Nhà cung cấp</span></a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+        <aside class="left-sidebar" data-sidebarbg="skin6">
+            <div class="scroll-sidebar">
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/nguoiban/thongtincanhan"
+                               aria-expanded="false">
+                                <i class="fas fa-user" aria-hidden="true"></i>
+                                <span class="hide-menu">Thông tin cá nhân</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item pt-2">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/nguoiban/quanlysanpham"
+                               aria-expanded="false">
+                                <i class="fab fa-product-hunt" aria-hidden="true"></i>
+                                <span class="hide-menu">Quản lý sản phẩm</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/nguoiban/quanlydonhang"
+                               aria-expanded="false">
+                                <i class="fas fa-clipboard-list" aria-hidden="true"></i>
+                                <span class="hide-menu">Quản lý đơn hàng</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" href="/nguoiban/thongkebaocao"
+                               aria-expanded="false">
+                                <i class="fas fa-chart-bar" aria-hidden="true"></i>
+                                <span class="hide-menu">Thống kê</span>
+                            </a>
+                        </li>
+                        <li class="sidebar-item">
+                            <a class="sidebar-link waves-effect waves-dark sidebar-link" th:href="@{/j_spring_security_logout}"
+                               aria-expanded="false">
+                                <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                                <span class="hide-menu" >Đăng xuất</span>
+                            </a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </aside>
+
+        <div class="page-wrapper" style="min-height: 250px;">
+            <div class="page-breadcrumb bg-white">
+                <div class="row align-items-center">
+                    <br>
+                    <div style="margin-top: 10px; ">
+                        <h2 style="float: left;">Cập nhật địa chỉ</h2>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="white-box">
+                            <form th:object="${diachi}" th:action="@{/nguoiban/updatediachinguoiban}" method="post">
+
+                                <input type="hidden" th:field="*{madiachi}">
+                                <input type="hidden" th:field="*{nguoidung}">
+                                <div class="form-group">
+                                    <label>Đường</label>
+                                    <input type="text" required th:field="*{duong}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Ấp</label>
+                                    <input type="text" required th:field="*{ap}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Xã</label>
+                                    <input type="text" required th:field="*{xa}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Huyện</label>
+                                    <input type="text" required th:field="*{huyen}" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>Thành phố</label>
+                                    <input type="text" required th:field="*{thanhpho}" class="form-control">
+                                </div>
+                                <input type="submit" class="btn btn-primary" value="Cập nhật">
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer text-center">
+            <h4 class="box-title">Võ Thanh Nhàn - 17098871</h4>
+            <h4 class="box-title">Mai Quốc Bảo - 17089051</h4>
+        </footer>
+    </div>
+</div>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

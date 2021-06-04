@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Danh sách yêu thích</h2>
+
+                    <th:block th:if="${erroryeuthich}">
+                        <div class="alert alert-success" role="alert">
+                            <th:block th:utext="${errorsanpham}"></th:block>
+                        </div>
+                    </th:block>
+
+                    <div class="breadcrumbs">
+                        <ol class="breadcrumb">
+                            <li><a href="/">Home</a></li>
+                            <li class="active">Yêu thích</li>
+                        </ol>
+                    </div>
+                    <div class="table-responsive cart_info">
+                        <table class="table table-condensed">
+
+                            <thead>
+                            <tr class="cart_menu">
+                                <td style="text-align:center">STT</td>
+                                <td style="text-align:center">Hình ảnh</td>
+                                <td style="text-align:center">Tên sản phẩm</td>
+                                <td style="text-align:center">Đơn giá</td>
+                                <td style="text-align:center">Thêm vào giỏ hàng</td>
+                                <td style="text-align:center">Xóa</td>
+                            </tr>
+                            </thead>
+                            <tbody th:each="item,state : ${yeuthichs}">
+                            <tr>
+                                <td style="text-align:center">
+                                    <p th:text="${state.index+1}"></p>
+                                </td>
+
+                                <td style="text-align:center">
+                                    <img style="width:200px; height:200px"  th:src="@{'getimage/'+${item.sanpham.hinhanh}}" alt="">
+                                </td>
+
+                                <td style="width:400px; text-align:center;">
+                                    <h5  th:text="${item.sanpham.tensanpham}"></h5>
+                                    ID : <label th:text="${item.sanpham.masanpham}"></label>
+                                </td>
+
+                                <td style="text-align:center">
+                                    <p  th:text="(${item.sanpham.dongia - item.sanpham.dongia*item.sanpham.khuyenmai/100})">$59</p>
+                                </td>
+                                <td style="text-align:center">
+                                    <a th:href="${'/giohang/'+ item.sanpham.masanpham}" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Thêm vào giỏ hàng</a>
+                                </td>
+
+                                <td class="cart_delete" style="text-align:center">
+                                    <br><br><br><br>
+                                    <a  class="cart_quantity_delete" th:href="${'/yeuthich/xoa/' + item.sanpham.masanpham}"><i class="fa fa-times"></i></a>
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <ul class="pagination" th:each="pagenumber : ${pagenumber}">
+                            <li><a th:href="@{/yeuthich/(page=${pagenumber-1},size=9)}"
+                                   th:class="${pagenumber-1<0} ? 'btn btn-default disabled':'btn btn-default'">&laquo;</a></li>
+                            <li><a th:block th:utext="${pagenumber+1}"></th:block></a></li>
+                            <li><a th:href="@{/yeuthich/(page=${pagenumber+1},size=9)}"
+                                   th:class="${pagenumber+1==totalpage} ? 'btn btn-default disabled':'btn btn-default'">&raquo;</a></li>
+                        </ul>
+
+
+                    </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

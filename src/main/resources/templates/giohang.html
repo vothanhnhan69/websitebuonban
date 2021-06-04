@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Cart</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<form method="post" th:action="@{/giohang/update}">
+    <section>
+        <div class="container">
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="/">Home</a></li>
+                    <li class="active">Giỏ hàng</li>
+                </ol>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+
+                        <thead>
+                        <tr class="cart_menu">
+                            <td style="text-align:center">STT</td>
+                            <td style="text-align:center">Hình ảnh</td>
+                            <td style="text-align:center">Tên sản phẩm</td>
+                            <td style="text-align:center">Đơn giá</td>
+                            <td style="text-align:center">Số lượng kho</td>
+                            <td style="text-align:center">Số lượng</td>
+                            <td style="text-align:center">Thành tiền</td>
+                            <td style="text-align:center">Xóa</td>
+                        </tr>
+                        </thead>
+                        <tbody th:each="item,state : ${session.cart}">
+                            <tr>
+                                <td style="text-align:center">
+                                    <p  th:text="${state.index+1}"></p>
+                                </td>
+
+                                <td style="text-align:center">
+                                    <img style="width:200px; height:200px"  th:src="@{'/getimage/'+${item.sanpham.hinhanh}}" alt="">
+                                </td>
+
+                                <td style="width:400px; text-align:center">
+                                    <h5  th:text="${item.sanpham.tensanpham}"></h5>
+                                    ID : <label th:text="${item.sanpham.masanpham}"></label>
+                                </td>
+
+                                <td style="text-align:center">
+                                    <p  th:text="(${item.sanpham.dongia - item.sanpham.dongia*item.sanpham.khuyenmai/100})">$59</p>
+                                </td>
+                                <td style="text-align:center">
+                                    <p  th:text="(${item.sanpham.soluong})">$59</p>
+                                </td>
+
+
+                                <td class="cart_quantity" style="text-align:center">
+                                    <div class="cart_quantity_button">
+                                        <input style="width:50px" type="number" th:value="${item.soluong}" th:max="${item.sanpham.soluong}" name="soluong" size="2" autocomplete="off" min="1">
+                                    </div>
+                                </td>
+
+                                <td class="cart_total" style="text-align:center">
+                                    <p  class="cart_total_price" th:text="${(item.sanpham.dongia - item.sanpham.dongia*item.sanpham.khuyenmai/100)*item.soluong}">$59</p>
+                                </td>
+
+                                <td class="cart_delete" style="text-align:center">
+                                    <br><br><br><br>
+                                    <a  class="cart_quantity_delete" th:href="${'/giohang/xoa/' + item.sanpham.masanpham}"><i class="fa fa-times"></i></a>
+                                </td>
+                            </tr>
+                        </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </section>
+    <section id="do_action">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="total_area">
+                        <ul>
+                            <li>Tổng tiền<span th:text="${tien}">$59</span></li>
+                        </ul>
+                     <button type="submit" class="btn btn-default update">Cập nhật</button>
+                        <a class="btn btn-default update" href="/thanhtoan">Thanh toán</a>
+                        <a class="btn btn-default check_out" href="/cuahang">Tiếp tục mua hàng</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+    <script type="text/JavaScript" src="/static/jsadmin/rangbuocdulieu.js"></script>
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Thông tin tài khoản</h2>
+
+
+
+                    <form th:object="${khachhang}" th:action="capnhatkh" method="post">
+
+                        <th:block th:if="${error1}">
+                            <div class="alert alert-success" role="alert">
+                                <th:block th:utext="${error1}"></th:block>
+                            </div>
+                        </th:block>
+
+                        <input type="hidden" th:field="*{makhachhang}">
+                        <div class="form-group" >
+                            <label>Tên</label>
+                            <input type="text" required th:field="*{tenkhachhang}" class="form-control">
+                        </div>
+                        <div class="form-group" >
+                            <label>SĐT</label><span class="label-input100" style="color:red" id="sdterrorupdate" ></span>
+                            <input type="text" th:field="*{sdt}" required  onblur="return kiemtrasdtupdate();" id="sdtupdate" class="form-control">
+                        </div>
+                            <div th:object="${diachi}">
+                                <label>Địa chỉ</label><a th:href="@{/capnhatdiachi/(*{madiachi})}">     Cập nhật địa chỉ</a>
+                                    <div class="form-group">
+                                        <label>Đường</label>
+                                        <input type="text" readonly th:field="*{duong}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Ấp</label>
+                                        <input type="text" readonly th:field="*{ap}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Xã</label>
+                                        <input type="text" readonly th:field="*{xa}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Huyện</label>
+                                        <input type="text" readonly th:field="*{huyen}" class="form-control">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Thành phố</label>
+                                        <input type="text" readonly th:field="*{thanhpho}" class="form-control">
+                                    </div>
+                            </div>
+                        <input type="hidden" th:field="*{nguoidung}">
+<!--                        <input type="hidden" th:field="*{nguoidung.taikhoan}">-->
+<!--                        <input type="hidden" th:field="*{nguoidung.ma}">-->
+<!--                        <input type="hidden" th:field="*{nguoidung.email}">-->
+<!--                        <input type="hidden" th:field="*{nguoidung.matkhau}">-->
+<!--                        <input type="hidden" th:field="*{nguoidung.vaitro}">-->
+<!--                        <input type="hidden" th:field="*{nguoidung.trangthai}">-->
+                        <input type="submit" onclick="return kiemtraupdate();" class="btn btn-success"value="Cập nhật">
+
+                    </form>
+
+                    <br>
+                    <a href="/doimatkhau"><button class="btn btn-success">Đổi mật khẩu</button></a>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

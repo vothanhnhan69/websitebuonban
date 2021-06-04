@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right" th:object="${sanpham}">
+                <div class="product-details" id="chitietsanpham" >
+                    <div class="col-sm-5">
+                        <div class="view-product">
+                            <img th:src="@{'/getimage/'+*{hinhanh}}" alt="">
+                        </div>
+                    </div>
+
+                    <div class="col-sm-7">
+                        <div class="product-information">
+                            <input type="hidden" th:value="*{masanpham}">
+                            <h2 th:text="*{tensanpham}"></h2>
+
+                            <span>
+                                <del><h2 th:text="*{dongia}"></h2></del>
+                                <span th:text="*{dongia-dongia*khuyenmai/100}"></span>
+                                <br>
+                                <label >Số lượng trong kho: </label><b th:text="*{soluong}"></b>  <br>
+                                <br>
+
+<!--                                  <th:block >-->
+<!--                                    <li th:if="${username==''}" ><a href="/dangnhap"><i class="fa fa-lock"></i> Đăng nhập</a></li>-->
+<!--                                    <li class="dropdown" th:if="${username}">-->
+<!--                                        <a class="dropdown-toggle" data-toggle="dropdown" href="#" th:utext="${username}"></a>-->
+<!--                                        <div class="dropdown-menu">-->
+<!--                                            <a class="dropdown-item" th:href="@{/j_spring_security_logout}">Đăng xuất</a>-->
+<!--                                        </div>-->
+<!--                                    </li>-->
+<!--                                </th:block>-->
+
+
+                                <th:block>
+                                   <div th:if="*{kichthuoc==''}">
+                                       <label></label>
+                                   </div>
+                                    <div th:if="*{kichthuoc!=''}">
+                                        <label>Kích thước:  </label><b th:text="*{kichthuoc}"></b>
+                                    </div>
+                                </th:block>
+                                <br>
+                                  <th:block>
+                                      <div th:if="*{mausac==''}">
+                                         <label></label>
+                                      </div>
+                                      <div th:if="*{mausac!=''}">
+                                          <label>Màu sắc:  </label><b th:text="*{mausac}"> </b>
+                                      </div>
+                                  </th:block>
+                                <br>
+                            </span>
+                            <br>
+                            <br>
+                            <a class="btn btn-default add-to-cart" th:href="@{'/giohang/'+*{masanpham}}">
+                                Thêm vào giỏ hàng
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="category-tab shop-details-tab">
+                    <div class="col-sm-12">
+                        <ul class="nav nav-tabs">
+                            <li><a href="#details" data-toggle="tab">Mô tả sản phẩm</a></li>
+                            <li><a href="#tag" data-toggle="tab">Danh sách đánh giá</a></li>
+                            <li class="active"><a href="#reviews" data-toggle="tab">Đánh giá</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="tab-content">
+
+                        <div class="tab-pane fade" id="details">
+                            <div class="col-sm-12" style="padding-left:5px">
+                                <h4 th:text="*{mota}"></h4>
+                            </div>
+                        </div>
+
+                        <div class="tab-pane fade" id="tag" >
+                            <div class="col-sm-12" th:each="item : ${listdanhgia}">
+                                <div class="col-sm-3">
+                                    <h5 style="float:right;" th:text="${item.khachhang.tenkhachhang}"></h5>
+                                </div>
+
+
+                                <div class="col-sm-9">
+                                    <textarea class="form-control" style="float:left;" readonly rows="3" th:text="${item.noidung}"></textarea>
+                                </div>
+
+                                <br> <br> <br> <br>  <br>
+                            </div>
+                        </div>
+
+
+
+                        <div class="tab-pane fade active in" id="reviews" >
+                            <div class="col-sm-12">
+
+                                <form th:action="@{/themdanhgia}" th:object="${danhgia}" method="post">
+                                    <input type="hidden" th:field="*{sanpham}">
+                                    <textarea class="form-control" th:field="*{noidung}"></textarea>
+                                    <b>Đánh giá: </b>
+                                    <input type="submit" value="Đánh giá" class="btn btn-default pull-right">
+                                </form>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

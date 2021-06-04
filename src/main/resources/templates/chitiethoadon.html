@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Chi tiết hóa đơn</h2>
+
+                    <th:block th:if="${errordonhang}">
+                        <div class="alert alert-success" role="alert">
+                            <th:block th:utext="${errordonhang}"></th:block>
+                        </div>
+                    </th:block>
+
+
+                   <h6 th:text="' Mã hóa đơn: ' +${mahd}" th:value="${mahd}"></h6>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>STT</th>
+                            <th>Sản phẩm</th>
+                            <th>Hình ảnh</th>
+                            <th>Đơn giá</th>
+                            <th>Số lượng</th>
+                            <th>Thành tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Hủy đơn hàng</th>
+
+                        </tr>
+                        </thead>
+                        <tbody>
+
+                        <div th:each="item,state : ${chitiethoadons}">
+                        <tr>
+                            <td style="text-align:center">
+                                <p  th:text="${state.index+1}"></p>
+                            </td>
+
+                            <td th:text="${item.sanpham.tensanpham}"></td>
+                            <td style="text-align:center">
+                                <img style="width:200px; height:200px"  th:src="@{'/getimage/'+${item.sanpham.hinhanh}}" alt="">
+                            </td>
+
+                            <td th:text="${item.dongia}"></td>
+                            <td th:text="${item.soluong}"></td>
+                            <td th:text="${item.dongia * item.soluong}"></td>
+                            <td th:text="${item.trangthai}"></td>
+                            <td><a th:href="'/huydonhang/'+${item.machitiethoadon}">Hủy</a></td>
+                        </tr>
+                        </div>
+                        </tbody>
+                    </table>
+
+                </div>
+
+                <p th:text="'Tổng tiền: '+ ${tien}" th:value="tien"></p>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="footer :: myfooter"></div>
+
+
+</body>
+</html>

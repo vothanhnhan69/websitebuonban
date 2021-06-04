@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Shop</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+
+<section id="cart_items">
+    <div class="container">
+
+            <div class="breadcrumbs">
+                <ol class="breadcrumb">
+                    <li><a href="#">Home</a></li>
+                    <li class="active">Thanh toán</li>
+                </ol>
+            </div>
+            <div class="review-payment">
+                <h2>Xem lại và thanh toán</h2>
+            </div>
+            <div class="table-responsive cart_info">
+                <table class="table table-condensed">
+                    <thead>
+                    <tr class="cart_menu">
+                        <td style="text-align:center">STT</td>
+                        <td style="text-align:center">Hình ảnh</td>
+                        <td style="text-align:center">Tên sản phẩm</td>
+                        <td style="text-align:center">Đơn giá</td>
+                        <td style="text-align:center">Số lượng</td>
+                        <td style="text-align:center">Thành tiền</td>
+                    </tr>
+                    </thead>
+
+                    <tbody th:each="item,state : ${session.cart}">
+                    <tr>
+                        <td style="text-align:center">
+                            <p  th:text="${state.index+1}"></p>
+                        </td>
+
+                        <td style="text-align:center">
+                            <img style="width:200px; height:200px"  th:src="@{'getimage/'+${item.sanpham.hinhanh}}" alt="">
+                        </td>
+
+                        <td style="width:400px; text-align:center">
+                            <h5  th:text="${item.sanpham.tensanpham}"></h5>
+                            ID : <label th:text="${item.sanpham.masanpham}"></label>
+                        </td>
+
+                        <td style="text-align:center">
+                            <p  th:text="(${item.sanpham.dongia - item.sanpham.dongia*item.sanpham.khuyenmai/100})"></p>
+                        </td>
+
+                        <td class="cart_quantity" style="text-align:center">
+
+                                <p th:text="${item.soluong}"></p>
+
+                        </td>
+
+
+                        <td class="cart_total" style="text-align:center">
+                            <p  class="cart_total_price" th:text="${(item.sanpham.dongia - item.sanpham.dongia*item.sanpham.khuyenmai/100)*item.soluong}">$59</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+
+
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="total_area">
+
+                        <ul>
+                            <li>Tổng tiền<span th:text="${tien}">$59</span></li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+            <div class="shopper-informations">
+                <div class="review-payment">
+                    <h2>Thông tin thanh toán</h2>
+                </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            <label>Tên khách hàng</label>
+                            <input type="text" class="form-control" th:value="${tenkh}" name="tenkh" readonly required>
+                        </div>
+                        <div class="form-group">
+                            <label>Email</label>
+                            <input type="text" class="form-control" th:value="${email}" name="email" readonly required>
+                        </div>
+
+
+                        <div class="form-group">
+                            <label>Chọn phương thức thanh toán</label>
+                            <br>
+                            <a href="/thanhtoantienmat"><button type="button" class="btn btn-danger">Thanh toán bằng tiền mặt</button></a>
+                            <a href="/thanhtoanpaypal"><button type="button" class="btn btn-danger" >Thanh toán Paypal</button></a>
+                        </div>
+
+                    </div>
+
+                </form>
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

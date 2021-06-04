@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <title>Login</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!--===============================================================================================-->
+    <link rel="icon" type="image/png" href="/static/imageslogin/icons/favicon.ico"/>
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/bootstrap/css/bootstrap.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/fonts/font-awesome-4.7.0/css/font-awesome.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/fonts/iconic/css/material-design-iconic-font.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/animate/animate.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/css-hamburgers/hamburgers.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/animsition/css/animsition.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/select2/select2.min.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/vendorlogin/daterangepicker/daterangepicker.css">
+    <!--===============================================================================================-->
+    <link rel="stylesheet" type="text/css" href="/static/csslogin/util.css">
+    <link rel="stylesheet" type="text/css" href="/static/csslogin/main.css">
+    <!--===============================================================================================-->
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/jquery/jquery-3.2.1.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/animsition/js/animsition.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/bootstrap/js/popper.js"></script>
+    <script src="/static/vendorlogin/bootstrap/js/bootstrap.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/select2/select2.min.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/daterangepicker/moment.min.js"></script>
+    <script src="/static/vendorlogin/daterangepicker/daterangepicker.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/vendorlogin/countdowntime/countdowntime.js"></script>
+    <!--===============================================================================================-->
+    <script src="/static/jslogin/main.js"></script>
+
+    <script type="text/JavaScript" src="/static/jsadmin/rangbuocdulieu.js"></script>
+
+
+</head>
+<body>
+
+<div class="limiter">
+    <div class="container-login100" style="background-image: url('/static/imageslogin/bg-01.jpg');">
+        <div class="wrap-login100 p-l-55 p-r-55 p-t-65 p-b-54" style="height: 1100px;">
+            <form class="login100-form validate-form" th:object="${userdto}" th:action="@{dangkynguoiban}" method="post">
+					<span class="login100-form-title p-b-49" style="font-family: Arial, Helvetica, sans-serif">
+						Đăng ký tài khoản người bán hàng
+					</span>
+
+                <th:block th:if="${error}">
+                    <div class="alert alert-danger" role="alert">
+                        <th:block th:utext="${error}"></th:block>
+                    </div>
+                </th:block>
+
+                <input type="hidden" th:field="*{ma}">
+                <div class="wrap-input100 validate-input m-b-23"  >
+                    <span class="label-input100">Tên</span>
+                    <input class="input100" th:field="*{ten}"  placeholder="Nhập tên" required type="text" name="tennguoiban" id="tennguoiban">
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+
+                <div class="wrap-input100 validate-input m-b-23" >
+                    <span class="label-input100">Email</span><span class="label-input100" style="color:red" id="emailerror" ></span>
+                    <input class="input100" type="text" onblur="return kiemtraemail();" placeholder="Nhập email" required th:field="*{email}" name="emailnguoiban" id="emailnguoiban">
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+                <div class="wrap-input100 validate-input m-b-23">
+                    <span class="label-input100">Số điện thoại</span><span class="label-input100" style="color:red" id="sdterror" ></span>
+                    <input class="input100" th:field="*{sdt}" onblur="return kiemtrasdt();" placeholder="Nhập số điện thoại" required type="text" name="sdtnguoiban" id="sdtnguoiban">
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+
+
+
+                <div class="wrap-input100 validate-input m-b-23" >
+                    <span class="label-input100">Tài khoản</span><span class="label-input100" style="color:red" id="taikhoanerror" ></span>
+                    <input class="input100" th:field="*{username}" onblur="return kiemtrataikhoan();" placeholder="Nhập tài khoản" required type="text" name="usernamenguoiban" id="usernamenguoiban">
+                    <span class="focus-input100" data-symbol="&#xf206;"></span>
+                </div>
+
+
+                <div class="wrap-input100 validate-input">
+                    <span class="label-input100">Mật khẩu</span><span class="label-input100" style="color:red" id="passworderror" ></span>
+                    <input class="input100" th:field="*{password}" onblur="return kiemtrapassword();" required placeholder="Nhập mật khẩu" type="password" name="passwordnguoiban" id="passwordnguoiban">
+                    <span class="focus-input100" data-symbol="&#xf190;"></span>
+                </div>
+                <br>
+                <div class="wrap-input100 validate-input" >
+                    <span class="label-input100">Nhập lại mật khẩu</span><span class="label-input100" style="color:red" id="repassworderror" ></span>
+                    <input class="input100" type="password" onblur="return kiemtrapassword();"  required placeholder="Nhập lại mật khấu" name="repasswordnguoiban" id="repasswordnguoiban">
+                    <span class="focus-input100" data-symbol="&#xf190;"></span>
+                </div>
+
+
+                <br>
+                <div class="container-login100-form-btn">
+                    <div class="wrap-login100-form-btn">
+                        <div class="login100-form-bgbtn"></div>
+                        <button type="submit" onclick="return kiemtranguoiban();" class="login100-form-btn">Đăng ký</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="dropDownSelect1"></div>
+
+
+
+</body>
+</html>

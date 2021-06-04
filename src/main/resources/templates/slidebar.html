@@ -1,0 +1,63 @@
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<body>
+<div th:fragment="myslidebar">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <!--[if lt IE 9]>
+    <script src="/static/js/html5shiv.js"></script>
+    <script src="/static/js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+
+    <div class="left-sidebar">
+        <h2>Danh mục</h2>
+        <div class="panel-group category-products" id="accordian" >
+
+            <div class="panel panel-default" th:each="item : ${danhmucs}">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                            <a th:text="${item.tendanhmuc}" data-toggle="collapse" data-parent="#accordian" th:href="'#'+${item.madanhmuc}">
+                            </a>
+                        <span class="badge pull-right"><i class="fa fa-plus"></i></span>
+                    </h4>
+                </div>
+
+
+                <div th:id="${item.madanhmuc}" class="panel-collapse collapse">
+                    <div class="panel-body" >
+                        <ul th:each="item1 : ${item.dsloaidanhmuc}">
+                            <li><a th:href="'/cuahang/sanphamtheoloaidanhmuc/'+${item1.maloaidanhmuc}" th:text="${item1.tenloaidanhmuc}"> </a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="shipping text-center">
+            <img src="/static/images/home/shipping.jpg" alt="" />
+        </div>
+
+
+    </div>
+</div>
+
+
+
+
+</body>
+</html>

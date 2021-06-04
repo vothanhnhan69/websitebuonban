@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.springframework.org/schema/data/jaxb">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Index</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/static/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/static/css/price-range.css" rel="stylesheet">
+    <link href="/static/css/animate.css" rel="stylesheet">
+    <link href="/static/css/main.css" rel="stylesheet">
+    <link href="/static/css/responsive.css" rel="stylesheet">
+    <script src="/static/js/jquery.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jquery.scrollUp.min.js"></script>
+    <script src="/static/js/price-range.js"></script>
+    <script src="/static/js/jquery.prettyPhoto.js"></script>
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/html5shiv.js"></script>
+
+    <link rel="shortcut icon" href="/static/images/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/static/images/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/static/images/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/static/images/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/static/images/ico/apple-touch-icon-57-precomposed.png">
+
+</head>
+
+<body>
+
+<div th:replace="header :: myheader"></div>
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-3">
+                <div th:replace="slidebar :: myslidebar"></div>
+            </div>
+
+            <div class="col-sm-9 padding-right">
+                <div class="features_items">
+                    <h2 class="title text-center">Cập nhật địa chỉ</h2>
+                    <form th:object="${diachi}" th:action="@{/updatediachi}" method="post">
+                        <input type="hidden" th:field="*{madiachi}">
+                        <input type="hidden" th:field="*{nguoidung}">
+                        <div class="form-group">
+                            <label>Đường</label>
+                            <input type="text" required th:field="*{duong}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Ấp</label>
+                            <input type="text" required th:field="*{ap}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Xã</label>
+                            <input type="text" required th:field="*{xa}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Huyện</label>
+                            <input type="text" required th:field="*{huyen}" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Thành phố</label>
+                            <input type="text"  required th:field="*{thanhpho}" class="form-control">
+                        </div>
+                        <input type="submit" class="btn btn-primary" value="Cập nhật">
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div th:replace="footer :: myfooter"></div>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset='utf-8'>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+<div class="container">
+    <p style="color: red; font-weight: bold" th:text="'Dear ' + ${name} + ','"></p>
+    Cảm ơn bạn vì mua sản phẩm của chúng tôi.
+    <div class="card bg-info text-white">
+        <div class="card-body">
+            <div style="padding:10px;" th:object="${hoadons}">
+                <h2 style="text-align:center; color : blueviolet;">Thông tin hóa đơn</h2>
+                <h6 th:text="'Mã hóa đơn: ' +${hoadons.mahd}"></h6>
+                <table class="table table-bordered ">
+                    <thead class="thead-light">
+                    <tr>
+                        <th style="text-align:center">STT</th>
+                        <th style="text-align:center">ID</th>
+                        <th style="text-align:center">Tên sản phẩm</th>
+                        <th style="text-align:center">Số lượng</th>
+                        <th style="text-align:center">Đơn giá</th>
+                        <th style="text-align:center">Thành tiền</th>
+                    </tr>
+                    </thead>
+
+                    <tbody th:each="item1,state: ${hoadons.listcthd}">
+                    <tr>
+                        <td style="text-align:center" th:text="${state.index+1}"></td>
+                        <td style="text-align:center" th:text="${item1.sanpham.masanpham}"></td>
+                        <td style="text-align:center" th:text="${item1.sanpham.tensanpham}"></td>
+                        <td style="text-align:center" th:text="${item1.soluong}"></td>
+                        <td style="text-align:center" th:text="${item1.dongia}"></td>
+                        <td style="text-align:center" th:text="${item1.soluong * item1.dongia}"></td>
+                    </tr>
+
+                    </tbody>
+                </table>
+                <h5 th:text="'Địa chỉ nhận hàng: ' +${hoadons.diachi}"></h5>
+                <h5 th:text="'Phương thức thanh toán: ' +${hoadons.phuongthucthanhtoan}"></h5>
+                <h4 th:text="'Tổng tiền: ' + ${tongtien} "></h4>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
